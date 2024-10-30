@@ -483,8 +483,10 @@ function isInteger(number) {
  * '4.567abcdefgh' => 4.567
  * 'abcdefgh'      => NaN
  */
-function getFloatOnString(/* str */) {
- throw new Error('Not implemented');
+function getFloatOnString(str) {
+ const parsed = Number.parseFloat(str);
+
+ return Number.isNaN(parsed) ? NaN : parsed;
 }
 
 /**
@@ -501,8 +503,10 @@ function getFloatOnString(/* str */) {
  * '1.234', 2           => 1
  * '10', 8              => 8
  */
-function getIntegerOnString(/* str, base */) {
- throw new Error('Not implemented');
+function getIntegerOnString(str, base) {
+ if (base < 2 || base > 36) return NaN;
+ const parsed = Number.parseInt(str, base);
+ return Number.isNaN(parsed) ? NaN : parsed;
 }
 
 /**
@@ -516,8 +520,8 @@ function getIntegerOnString(/* str, base */) {
  * 3.5      => false
  * 2 ** 53  => false
  */
-function isSafeInteger(/* number */) {
- throw new Error('Not implemented');
+function isSafeInteger(number) {
+ return Number.isSafeInteger(number);
 }
 
 /**
@@ -638,8 +642,8 @@ function getRandomInteger(min, max) {
  * @example:
  * 3, 4 => 5
  */
-function getHypotenuse(/* a, b */) {
- throw new Error('Not implemented');
+function getHypotenuse(a, b) {
+ return Math.hypot(a, b);
 }
 
 /**
@@ -655,8 +659,13 @@ function getHypotenuse(/* a, b */) {
  * 10 => 5
  * 15 => 8
  */
-function getCountOfOddNumbers(/* number */) {
- throw new Error('Not implemented');
+function getCountOfOddNumbers(number) {
+ let counter = 0;
+ const absNum = Math.abs(number);
+ for (let i = 1; i <= absNum; i += 2) {
+  counter += 1;
+ }
+ return counter;
 }
 
 module.exports = {
